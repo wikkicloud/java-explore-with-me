@@ -14,6 +14,7 @@ import ru.practicum.ewm.event.model.Event;
 import ru.practicum.ewm.event.model.SortType;
 import ru.practicum.ewm.user.dto.UserShortDto;
 
+import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -80,7 +81,7 @@ public class EventMapperServiceImp implements EventMapperService {
                 .publishedOn(event.getPublished())
                 .requestModeration(event.isRequestModeration())
                 .state(event.getState())
-                .views(getViews(event.getId()))
+                .views(getViews(event))
                 .build();
     }
 
@@ -94,7 +95,7 @@ public class EventMapperServiceImp implements EventMapperService {
                 .eventDate(event.getEventDate())
                 .initiator(new UserShortDto(event.getInitiator().getId(), event.getInitiator().getName()))
                 .paid(event.getPaid())
-                .views(getViews(event.getId()))
+                .views(getViews(event))
                 .build();
     }
 
@@ -121,10 +122,10 @@ public class EventMapperServiceImp implements EventMapperService {
         }
     }
 
-    private int getViews(int id) {
+    private int getViews(Event event) {
         int views = 0;
-        String uri = String.format("/events/%s", id);
-        List<ViewStats> viewStats = httpClient.getStats(null, null,
+        String uri = String.format("/events/%s", event.getId());
+        List<ViewStats> viewStats = httpClient.getStats(event.getPublished(), LocalDateTime.now(),
                 List.of(uri), false);
         if (!viewStats.isEmpty())
             views = viewStats.get(0).getHits();
