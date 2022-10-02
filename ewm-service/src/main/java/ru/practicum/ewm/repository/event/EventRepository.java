@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import ru.practicum.ewm.model.event.Event;
 import ru.practicum.ewm.model.event.EventState;
+import ru.practicum.ewm.model.user.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -54,10 +55,15 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     /**
      * Список событий
      * @param ids список id событий
-     * @returnSet<Event>
+     * @return Set<Event>
      */
     Set<Event> findByIdIn(List<Integer> ids);
 
-
-
+    /**
+     * Список уникальных событий
+     * @param initiators список пользователей инициаторов события
+     * @param pageable
+     * @return List<Event>
+     */
+    List<Event> findDistinctByInitiatorIn(Set<User> initiators, Pageable pageable);
 }

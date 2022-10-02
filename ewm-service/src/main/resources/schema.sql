@@ -56,3 +56,8 @@ CREATE TABLE IF NOT EXISTS compilation_event (
     PRIMARY KEY (compilation_id, event_id)
 );
 
+CREATE TABLE IF NOT EXISTS user_subscription (
+    user_id INTEGER REFERENCES users (id) ON DELETE CASCADE,
+    to_user_id INTEGER REFERENCES users (id) ON DELETE CASCADE,
+    PRIMARY KEY (user_id, to_user_id)
+);
