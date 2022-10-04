@@ -45,100 +45,70 @@ ERD схема базы данных сервиса
 `GET http://localhost:8080/users/3/subscriptions/participant`
 
 Примеры ответов:  
-Подписка
+
+События возвращает объект Page
 ```json
 {
-    "id": 3,
-    "name": "Usver",
-    "email": "email189@yandex.ru",
-    "subscriptions": [
-        {
-            "id": 8,
-            "name": "Usver",
-            "email": "email198@gmail.com"
-        },
-        {
-            "id": 21,
-            "name": "Usver",
-            "email": "email222@yandex.ru"
-        },
-        {
-            "id": 12,
-            "name": "Usver",
-            "email": "email205@gmail.com"
-        },
-        {
-            "id": 4,
-            "name": "Usver",
-            "email": "email191@yandex.ru"
-        },
-        {
-            "id": 5,
-            "name": "Usver",
-            "email": "email193@yandex.ru"
-        },
-        {
-            "id": 23,
-            "name": "Usver",
-            "email": "email225@yandex.ru"
-        }
-    ]
-}
-```
-
-События  
-```json
-[
+  "content": [
     {
-        "title": "title",
-        "id": 4,
-        "annotation": "annotation169119129619612961691616161651651",
-        "category": {
-            "id": 7,
-            "name": "name192"
-        },
-        "confirmedRequests": 0,
-        "eventDate": "2095-09-06 13:30:38",
-        "initiator": {
-            "id": 4,
-            "name": "Usver"
-        },
-        "paid": true,
-        "views": 0
+      "title": "Perferendis placeat eos facere recusandae.",
+      "id": 7,
+      "annotation": "Nihil distinctio inventore error enim dolores et placeat. Corrupti et autem magnam quis. Est debitis est commodi hic commodi blanditiis atque eos porro. Qui omnis et sit esse deleniti velit. Id et soluta.",
+      "category": {
+        "id": 10,
+        "name": "Somalia synthesizing"
+      },
+      "confirmedRequests": 0,
+      "eventDate": "2022-10-04 16:46:39",
+      "initiator": {
+        "id": 7,
+        "name": "Wilfred Ortiz"
+      },
+      "paid": false,
+      "views": 0
     },
     {
-        "title": "title",
-        "id": 5,
-        "annotation": "annotation169119129619612961691616161651651",
-        "category": {
-            "id": 8,
-            "name": "name194"
-        },
-        "confirmedRequests": 0,
-        "eventDate": "2095-09-06 13:30:38",
-        "initiator": {
-            "id": 5,
-            "name": "Usver"
-        },
-        "paid": true,
-        "views": 0
-    },
-    {
-        "title": "Сап прогулки по рекам и каналам",
-        "id": 8,
-        "annotation": "Сап прогулки по рекам и каналам – это возможность увидеть Практикбург с другого ракурса",
-        "category": {
-            "id": 11,
-            "name": "name199"
-        },
-        "confirmedRequests": 0,
-        "eventDate": "2027-09-11 23:02:19",
-        "initiator": {
-            "id": 8,
-            "name": "Usver"
-        },
-        "paid": true,
-        "views": 0
+      "title": "title",
+      "id": 9,
+      "annotation": "annotation169119129619612961691616161651651",
+      "category": {
+        "id": 12,
+        "name": "name18"
+      },
+      "confirmedRequests": 0,
+      "eventDate": "2095-09-06 13:30:38",
+      "initiator": {
+        "id": 9,
+        "name": "Usver"
+      },
+      "paid": true,
+      "views": 0
     }
-]
+  ],
+  "pageable": {
+    "sort": {
+      "empty": true,
+      "sorted": false,
+      "unsorted": true
+    },
+    "offset": 0,
+    "pageNumber": 0,
+    "pageSize": 10,
+    "paged": true,
+    "unpaged": false
+  },
+  "last": true,
+  "totalPages": 1,
+  "totalElements": 2,
+  "size": 10,
+  "number": 0,
+  "sort": {
+    "empty": true,
+    "sorted": false,
+    "unsorted": true
+  },
+  "first": true,
+  "numberOfElements": 2,
+  "empty": false
+}
 ```

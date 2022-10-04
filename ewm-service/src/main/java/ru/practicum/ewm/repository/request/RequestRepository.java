@@ -1,10 +1,10 @@
 package ru.practicum.ewm.repository.request;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import ru.practicum.ewm.model.request.Request;
 import ru.practicum.ewm.model.request.RequestState;
-import ru.practicum.ewm.model.user.User;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -44,13 +44,11 @@ public interface RequestRepository extends JpaRepository<Request, Integer> {
 
     /**
      * Список запросов
-     * @param requesters список инициаторов запроса на участие в событии
+     * @param requestersIds идентификаторы инициаторов запроса
      * @param eventDate Дата начала события
-     * @param state стутус запроса на участие
-     * @return List<Request>
+     * @param state статус запроса
+     * @return
      */
-    List<Request> findByRequesterInAndEvent_EventDateAfterAndState(Set<User> requesters, LocalDateTime eventDate,
-                                                                   RequestState state, Pageable pageable);
-
-
+    Page<Request> findByRequester_IdInAndEvent_EventDateAfterAndState(
+            Set<Integer> requestersIds, LocalDateTime eventDate, RequestState state, Pageable pageable);
 }

@@ -30,7 +30,7 @@ public class UserController {
 
     @PostMapping
     public UserDto create(@Valid @RequestBody UserDto userDto) {
-        User user = userService.create(UserMapper.toUser(userDto));
+        User user = userService.save(UserMapper.toUser(userDto));
         log.info("Add user={}", user);
         return UserMapper.toUserDto(user);
     }

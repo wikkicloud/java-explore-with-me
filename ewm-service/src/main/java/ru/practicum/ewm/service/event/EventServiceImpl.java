@@ -2,7 +2,9 @@ package ru.practicum.ewm.service.event;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.practicum.ewm.model.category.Category;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 import static ru.practicum.ewm.util.Constant.CREATE_HOURS_TO_EVENT;
 import static ru.practicum.ewm.util.Constant.PUBLISH_HOURS_TO_EVENT;
@@ -217,6 +220,12 @@ public class EventServiceImpl implements EventService {
         return eventRepository.findByIdInAndStateInAndCategory_IdInAndEventDateAfterAndEventDateBefore(
                 users, states, categories, rangeStart, rangeEnd, PageRequest.of(from / size, size)
         );
+    }
+
+    @Override
+    public Page<Event> findEvents(Set<Integer> userIds, List<EventState> states, LocalDateTime rangeStart,
+                                  Pageable pageable) {
+        return eventRepository.findByInitiator_IdInAndStateInAndEventDateAfter(userIds, states, rangeStart, pageable);
     }
 
     @Override
