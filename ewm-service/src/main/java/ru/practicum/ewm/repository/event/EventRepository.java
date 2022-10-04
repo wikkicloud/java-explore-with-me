@@ -1,5 +1,6 @@
 package ru.practicum.ewm.repository.event;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -54,10 +55,18 @@ public interface EventRepository extends JpaRepository<Event, Integer> {
     /**
      * Список событий
      * @param ids список id событий
-     * @returnSet<Event>
+     * @return Set<Event>
      */
     Set<Event> findByIdIn(List<Integer> ids);
 
-
-
+    /**
+     *
+     * @param ids идентификаторы инициаторов событий
+     * @param states статусы событий
+     * @param minEventDate минимальная дата начала события
+     * @param pageable
+     * @return Page<Event>
+     */
+    Page<Event> findByInitiator_IdInAndStateInAndEventDateAfter(
+            Set<Integer> ids, List<EventState> states, LocalDateTime minEventDate, Pageable pageable);
 }

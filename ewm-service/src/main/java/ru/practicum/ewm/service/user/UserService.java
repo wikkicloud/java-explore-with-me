@@ -10,7 +10,7 @@ public interface UserService {
      * @param user пользователь
      * @return User
      */
-    User create(User user);
+    User save(User user);
 
     /**
      * Получает пользователя
