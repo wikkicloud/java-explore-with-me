@@ -1,8 +1,13 @@
 package ru.practicum.ewm.service.request;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import ru.practicum.ewm.model.request.Request;
+import ru.practicum.ewm.model.request.RequestState;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public interface RequestService {
     /**
@@ -27,4 +32,14 @@ public interface RequestService {
      * @return
      */
     Request cancelRequest(int requestId, int userId);
+
+    /**
+     * Список запросов
+     * @param requesterIds id инициаторов запроса
+     * @param eventDate минимальная дата события
+     * @param requestState статус запроса на участие
+     * @return Page<Request>
+     */
+    Page<Request> findByRequesterIdInAndEventEventDateBeforeAndState(
+            Set<Integer> requesterIds, LocalDateTime eventDate, RequestState requestState, Pageable pageable);
 }

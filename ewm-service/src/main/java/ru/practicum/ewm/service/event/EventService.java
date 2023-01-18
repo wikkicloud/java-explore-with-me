@@ -1,5 +1,7 @@
 package ru.practicum.ewm.service.event;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import ru.practicum.ewm.model.event.Event;
 import ru.practicum.ewm.model.event.EventState;
 import ru.practicum.ewm.model.request.Request;
@@ -7,6 +9,7 @@ import ru.practicum.ewm.model.request.Request;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public interface EventService {
     /**
@@ -123,6 +126,17 @@ public interface EventService {
      */
     List<Event> getEvents(List<Integer> users, List<EventState> states, List<Integer> categories,
                           LocalDateTime rangeStart, LocalDateTime rangeEnd, int from, int size);
+
+    /**
+     * Получение событий пользователями
+     * @param users список id инициаторов
+     * @param states список статусов событий
+     * @param rangeStart начало промежутка начала события
+     * @param from индекс первого элемента
+     * @param size размер страницы
+     * @return List<Event>
+     */
+    Page<Event> findEvents(Set<Integer> userIds, List<EventState> states, LocalDateTime rangeStart, Pageable pageable);
 
     /**
      * Получение событий публичный доступ

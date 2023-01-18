@@ -2,20 +2,23 @@ package ru.practicum.ewm.service.request;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import ru.practicum.ewm.exception.NotConditionException;
 import ru.practicum.ewm.model.event.Event;
 import ru.practicum.ewm.model.event.EventState;
-import ru.practicum.ewm.repository.event.EventRepository;
-import ru.practicum.ewm.exception.NotConditionException;
 import ru.practicum.ewm.model.request.Request;
 import ru.practicum.ewm.model.request.RequestState;
-import ru.practicum.ewm.repository.request.RequestRepository;
 import ru.practicum.ewm.model.user.User;
+import ru.practicum.ewm.repository.event.EventRepository;
+import ru.practicum.ewm.repository.request.RequestRepository;
 import ru.practicum.ewm.repository.user.UserRepository;
 
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -69,5 +72,12 @@ public class RequestServiceImpl implements RequestService {
             throw new NotConditionException("You can't cancel an already canceled request");
         request.setState(RequestState.CANCELED);
         return requestRepository.save(request);
+    }
+
+    @Override
+    public Page<Request> findByRequesterIdInAndEventEventDateBeforeAndState(
+            Set<Integer> requesterIds, LocalDateTime eventDate, RequestState requestState, Pageable pageable) {
+        return requestRepository.findByRequester_IdInAndEvent_EventDateAfterAndState(requesterIds, eventDate,
+                requestState, pageable);
     }
 }
